@@ -1,0 +1,44 @@
+ComPDFKit Conversion SDK v4.1.0 Release Date: 28 May 2026
+=====================================================
+
+Enhanced Features
+
+Core:
+- Added support for online license validation using XML license configuration files.
+- Added external AI callback interfaces for OCR, layout analysis, and table recognition, enabling integration with custom AI models.
+- Added support for scanning system fonts and improved font style matching.
+
+PDF to Word:
+- Added support for vertical text layout in Word output.
+- Added support for merging repeated headers and footers, with improved dynamic footer page number handling.
+- Added support for improved export of short hanging-indent paragraphs.
+- Improved header/footer, paragraph, table, text box, image, and multi-column layout restoration.
+
+PDF to Image:
+- Added support for rendering form fields during image conversion.
+
+OCR and AI:
+- Added an independent configuration option for AI-based table recognition.
+- Improved OCR paragraph font sizing and character width estimation.
+
+Issues Addressed
+
+Core:
+- Improved conversion stability, memory usage, and multi-threaded resource handling.
+- Improved handling of generated spaces, CJK text spacing, document transformations, links, SVG resources, path merging, and large image processing.
+
+PDF to Word:
+- Improved list recognition accuracy and reduced false positives for ambiguous ordered and unordered list markers.
+- Fixed issues where regular text, paragraphs, or special reference markers could be incorrectly recognized as list items.
+- Improved DOCX layout fidelity for list numbering, line-number paragraphs, CJK fonts, paragraph spacing, line height, indentation, compact tables, and table cell padding.
+- Fixed layout issues involving floating images, inline images, rotated images, special page numbers, text boxes, constrained containers, and multi-line headings.
+- Improved visual line grouping, paragraph splitting, text scaling, and layout measurement accuracy.
+
+Fonts:
+- Improved font substitution accuracy for missing glyphs, weight and style matching, width variants, CJK language matching, Japanese font preference, and symbol font normalization.
+
+PDF to Searchable PDF:
+- Fixed font selection issues in searchable PDF output and improved text layer font consistency.
+
+Table Recognition:
+- Improved table background extraction and table content alignment accuracy.
