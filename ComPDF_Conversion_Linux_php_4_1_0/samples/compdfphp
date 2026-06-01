@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# compdfphp — runs PHP with the ComPDFKit Conversion native libraries preloaded
+# via LD_PRELOAD on Linux. Required because the SDK ships its own allocator
+# (PartitionAlloc) which conflicts with PHP's already-initialised libc heap if
+# the library is loaded lazily via FFI::cdef(). Preloading at process start
+# makes all of the SDK's static constructors run before PHP allocates anything,
+# matching the load order used by the Python wheel and the standalone C demos.
+#
+# Usage:
+#   samples/compdfphp samples/version.php
+#   samples/compdfphp samples/direct_convert_demo.php
+#
+# Environment:
+#   COMPDFKIT_LIB_DIR  override the directory holding the native libraries.
+#
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PKG_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+OS_LOWER="$(uname -s | tr '[:upper:]' '[:lower:]')"
+
+case "${OS_LOWER}" in
+  linux*)
+    LIB_DIR="${COMPDFKIT_LIB_DIR:-${PKG_ROOT}/lib/linux}"
+    if [ ! -d "${LIB_DIR}" ]; then
+      echo "compdfphp: library directory not found: ${LIB_DIR}" >&2
+      exit 1
+    fi
+    PRELOAD="${LIB_DIR}/libonnxruntime.so.1.18.0:${LIB_DIR}/libopencv_world.so.410:${LIB_DIR}/libDocumentAI.so.4.0.0:${LIB_DIR}/libcpdfconversionsdk.so"
+    export LD_PRELOAD="${PRELOAD}${LD_PRELOAD:+:${LD_PRELOAD}}"
+    export LD_LIBRARY_PATH="${LIB_DIR}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+    export COMPDFKIT_LIB_DIR="${LIB_DIR}"
+    exec php "$@"
+    ;;
+  *)
+    echo "compdfphp: unsupported OS for this Linux package: ${OS_LOWER}" >&2
+    exit 1
+    ;;
+esac
