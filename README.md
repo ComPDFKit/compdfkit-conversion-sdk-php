@@ -2,7 +2,7 @@
 
 As part of the KDAN ecosystem, ComPDF Conversion SDK brings PDF document conversion to your PHP web applications. Convert PDF files into editable Office documents, images, HTML, and more — directly from your PHP backend. Whether you're building a document management system, an online converter service, or an enterprise web portal, you can integrate PDF conversion that preserves layout, tables, and formatting.
 
-> If you find this library helpful, please consider giving us a ⭐ **Star** on GitHub! Have feedback or questions? Join the conversation in our [Discussions](https://github.com/orgs/ComPDFKit/discussions).
+> If you find this library helpful, please consider giving us a ⭐ **Star** on GitHub! Have feedback or questions? Join the conversation in our [Discussions](https://github.com/ComPDFKit/compdfkit-conversion-sdk-php/discussions).
 
 **Supported Features**
 
